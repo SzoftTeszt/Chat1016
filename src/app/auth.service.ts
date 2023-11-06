@@ -7,17 +7,17 @@ import { Router } from '@angular/router';
   providedIn: 'root'
 })
 export class AuthService {
-
+  // url="https://us-central1-dvizsga-3be0a.cloudfunctions.net/api/"
   constructor(private afAuth:AngularFireAuth,
     private router:Router
     ) { 
-      this.getLoggedUser();
+      this.getLoggedUser().subscribe(
+        (user)=>console.log("User: ")
+      );
     }
 
   getLoggedUser(){
-    this.afAuth.authState.subscribe(
-      (user)=>console.log("User: ",user)
-    )
+    return this.afAuth.authState
   }
 
   forgotPassword(email:any){

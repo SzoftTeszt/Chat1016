@@ -28,7 +28,14 @@ export class SingInComponent {
         {
           console.log("Sikeres belépés!")
           this.showerror=false;
-          this.router.navigate(['/home'])
+          this.auth.getLoggedUser().subscribe(
+            (user)=>{
+             if (user?.emailVerified) this.router.navigate(['/home'])
+             else this.router.navigate(['/verifyemail'])
+            }
+
+          )
+          
         }
       )
       .catch(
