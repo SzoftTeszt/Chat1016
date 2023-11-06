@@ -8,6 +8,9 @@ import { Router } from '@angular/router';
   styleUrls: ['./sign-up.component.css']
 })
 export class SignUpComponent {
+  userEmail:any
+  password:any;
+
   constructor(private auth:AuthService, 
     private router:Router){}
   
@@ -17,4 +20,10 @@ export class SignUpComponent {
       .catch((hiba)=>console.log(hiba))
   }
 
+  signUp(){
+      this.auth.signUp(this.userEmail,this.password)
+      .then(
+        ()=>this.auth.sendVerificationEmail()
+      )
+  }
 }
